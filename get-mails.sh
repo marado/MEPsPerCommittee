@@ -3,12 +3,16 @@
 # Tired to write this again and again, this time I'm putting this together and online.
 # This is totally messy, issues and PRs are welcome.
 
+# TODO: since the only thing that changes in the URL between committees is the
+# actual committee name, get it as an argument
+
 # change this to the URL of the committee you want to get e-mail addresses for
-url="http://www.europarl.europa.eu/committees/en/imco/members.html?action="
+url="http://www.europarl.europa.eu/committees/en/juri/members.html?action="
 
 # number of pages with members there are. I should be extracting this, but whatever
 # Note: if you see "pages 1 to 8" then the actual number here is "7" and we'll go 0 to 7
-pages=7
+# TODO: get this information instead of making the user manually update the value
+pages=4
 
 # get the pages
 rm *html
