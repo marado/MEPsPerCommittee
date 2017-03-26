@@ -14,17 +14,23 @@ url="http://www.europarl.europa.eu/committees/en/juri/members.html?action="
 # TODO: get this information instead of making the user manually update the value
 pages=4
 
+DEBUG=false
+
 # get the pages
-rm *html
+rm -rf debug *html
 for p in $(seq 0 $pages); do
 	wget "$url$p" -o /dev/null -O "$p.html";
 done
 
 # get the MEP page URLs
-grep photo_mep *html|cut -d\" -f2 > meps-urls
+grep photo_mep *html|cut -d\" -f2|sed 's/\ /%20/g' > meps-urls
 
 # get the MEP pages
-rm *html
+if [ "$DEBUG" != true ]; then
+	rm *html
+else
+	mkdir debug; mv *html debug
+fi
 for m in $(cat meps-urls); do
 	wget "http://www.europarl.europa.eu$m" -o /dev/null;
 done
@@ -33,5 +39,7 @@ done
 grep mailto *html|cut -d\" -f2|cut -d: -f2-|rev|sed 's/\]ta\[/@/g'|sed 's/\]tod\[/\./g' > emails
 
 # cleanup
-rm meps-urls
-rm *html
+if [ "$DEBUG" != true ]; then
+	rm meps-urls
+	rm *html
+fi
