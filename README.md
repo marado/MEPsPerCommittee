@@ -10,4 +10,4 @@ Pull requests, issues, enhancements and ideas are most welcome.
 
 ## Related projects
 
-* [https://github.com/marado/MEP-emails](MEP-emails) is a script very similar to this one, but that returns the e-mail addresses of all MEPs, not only the ones on a particular Committee
+* [MEP-emails](https://github.com/marado/MEP-emails) is a script very similar to this one, but that returns the e-mail addresses of all MEPs, not only the ones on a particular Committee
