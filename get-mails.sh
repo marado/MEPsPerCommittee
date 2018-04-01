@@ -44,16 +44,21 @@ do
 		# change this to the URL of the committee you want to get e-mail addresses for
 		url="http://www.europarl.europa.eu/committees/en/${COM[i]}/members.html?action="
 
-		# number of pages with members there are. I should be extracting this, but whatever
-		# Note: if you see "pages 1 to 8" then the actual number here is "7" and we'll go 0 to 7
-		# TODO: get this information instead of making the user manually update the value
-		pages=4
-
+		# Let's do this:
 		DEBUG=false
+		rm -rf debug *html
+
+		# There's always at least one page:
+		wget $url"0" -o /dev/null -O "0.html";
+
+		# number of pages with members there are. I should be extracting this, but whatever
+		pages=$(grep \"?action= 0.html|grep class=\"\" |grep -v next_page|tail -1|cut -d\" -f2|cut -d= -f2);
+		if [ "$DEBUG" != true ]; then
+		  echo "There are $pages pages to process"
+		fi
 
 		# get the pages
-		rm -rf debug *html
-		for p in $(seq 0 $pages); do
+		for p in $(seq 1 $pages); do
 			wget "$url$p" -o /dev/null -O "$p.html";
 		done
 
