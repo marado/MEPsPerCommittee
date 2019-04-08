@@ -76,7 +76,7 @@ do
 		done
 
 		# get the email addresses from the MEP pages
-		grep mailto *html|cut -d\" -f2|cut -d: -f2-|rev|sed 's/\]ta\[/@/g'|sed 's/\]tod\[/\./g' > emails
+		grep mailto *html|cut -d\" -f4|cut -d: -f2-|rev|sed 's/\]ta\[/@/g'|sed 's/\]tod\[/\./g' > emails
 
 		# cleanup
 		if [ "$DEBUG" != true ]; then
